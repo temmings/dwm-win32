@@ -107,6 +107,7 @@ typedef struct {
 typedef struct {
 	const char *class;
 	const char *title;
+	const char *fixedTitle;
 	unsigned int tags;
 	bool isfloating;
 } Rule;
@@ -220,10 +221,11 @@ applyrules(Client *c) {
 	/* rule matching */
 	for(i = 0; i < LENGTH(rules); i++) {
 		r = &rules[i];
-		if((!r->title || strstr(getclienttitle(c->hwnd), r->title))
-		&& (!r->class || strstr(getclientclassname(c->hwnd), r->class))) {
+		if(((0 == strcmp(r->title, "")) || strstr(getclienttitle(c->hwnd), r->title))
+		&& ((0 == strcmp(r->fixedTitle, "")) || (0 == strcmp(getclienttitle(c->hwnd), r->fixedTitle)))
+		&& ((0 == strcmp(r->class, "")) || strstr(getclientclassname(c->hwnd), r->class))) {
 			c->isfloating = r->isfloating;
-			c->tags |= r->tags & TAGMASK ? r->tags & TAGMASK : tagset[seltags]; 
+			c->tags |= r->tags & TAGMASK ? r->tags & TAGMASK : tagset[seltags];
 		}
 	}
 	if(!c->tags)
