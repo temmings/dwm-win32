@@ -6,7 +6,7 @@ include config.mk
 SRC = dwm-win32.c
 OBJ = ${SRC:.c=.o}
 
-all: options dwm-win32
+all: options dwm-win32.exe
 
 options:
 	@echo dwm-win32 build options:
@@ -24,7 +24,7 @@ config.h:
 	@echo creating $@ from config.def.h
 	@cp config.def.h $@
 
-dwm-win32: ${OBJ}
+dwm-win32.exe: ${OBJ}
 	@echo CC -o $@
 	@${CC} -o $@ ${OBJ} ${LDFLAGS}
 

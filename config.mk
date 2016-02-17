@@ -13,4 +13,4 @@ CFLAGS = -std=c99 -pedantic -Wall -Os ${CPPFLAGS}
 LDFLAGS = -s -mwindows
 
 # compiler and linker
-CC = gcc
+CC = i686-w64-mingw32-gcc

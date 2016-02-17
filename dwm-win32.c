@@ -175,13 +175,13 @@ static void zoom(const Arg *arg);
 /* Shell hook stuff */
 
 typedef BOOL (*RegisterShellHookWindowProc) (HWND);
-RegisterShellHookWindowProc RegisterShellHookWindow;
+//RegisterShellHookWindowProc RegisterShellHookWindow;
 
 /* XXX: should be in a system header, no? */
-typedef struct {
-    HWND    hwnd;
-    RECT    rc;
-} SHELLHOOKINFO, *LPSHELLHOOKINFO;
+//typedef struct {
+//    HWND    hwnd;
+//    RECT    rc;
+//} SHELLHOOKINFO, *LPSHELLHOOKINFO;
 
 /* variables */
 static HWND dwmhwnd, barhwnd;
@@ -1127,7 +1127,7 @@ setup(HINSTANCE hInstance) {
 	arrange();
 	
 	/* Get function pointer for RegisterShellHookWindow */
-	RegisterShellHookWindow = (RegisterShellHookWindowProc)GetProcAddress(GetModuleHandle("USER32.DLL"), "RegisterShellHookWindow");
+	RegisterShellHookWindowProc RegisterShellHookWindow = (RegisterShellHookWindowProc)GetProcAddress(GetModuleHandle("USER32.DLL"), "RegisterShellHookWindow");
 	if (!RegisterShellHookWindow)
 		die("Could not find RegisterShellHookWindow");
 	RegisterShellHookWindow(dwmhwnd);
